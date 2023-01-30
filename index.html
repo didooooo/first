@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<style>
+    * {
+        margin: auto;
+        padding: auto;
+        box-sizing: border-box;
+        font-family: cursive;
+    }
+
+    body {
+        background-color: rgb(195, 241, 255);
+    }
+
+    .topnav {
+        box-shadow: 1px 1px 1px rgb(82, 172, 199);
+        width: 100%;
+        display: flex;
+        height: 5%;
+        border-radius: 5px;
+        overflow: hidden;
+        background: radial-gradient(rgb(143, 181, 230), rgb(91, 192, 222));
+    }
+
+    .topnav a {
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 10px 12px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        transform: scale(1.2);
+        color: black;
+        background: radial-gradient(rgb(189, 205, 253), rgb(91, 192, 222));
+        box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+        -webkit-transition: all 0.2s ease-out;
+        -moz-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+    }
+
+    .topnav a:hover:before {
+        -webkit-animation: sh02 0.5s 0s linear;
+        -moz-animation: sh02 0.5s 0s linear;
+        animation: sh02 0.5s 0s linear;
+    }
+
+    .topnav a:before {
+        content: '';
+        display: block;
+        width: 0px;
+        height: 86%;
+        position: absolute;
+        top: 7%;
+        left: 0%;
+        opacity: 0;
+        background: #fff;
+        box-shadow: 0 0 50px 30px #fff;
+        -webkit-transform: skewX(-20deg);
+        -moz-transform: skewX(-20deg);
+        -ms-transform: skewX(-20deg);
+        -o-transform: skewX(-20deg);
+        transform: skewX(-20deg);
+    }
+
+    @keyframes sh02 {
+        from {
+            opacity: 0;
+            left: 0%;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+            left: 100%;
+        }
+    }
+
+    .topnav a.active {
+        box-shadow: 0 0 0 0 transparent;
+        -webkit-transition: box-shadow 0.2s ease-in;
+        -moz-transition: box-shadow 0.2s ease-in;
+        transition: box-shadow 0.2s ease-in;
+    }
+
+    .form {
+        margin-left: 253px;
+        --input-bg: rgb(243, 225, 225);
+        --padding: 1.5em;
+        --rotate: 80deg;
+        /*  rotation degree of input*/
+        --gap: 2em;
+        /*  gap of items in input */
+        --icon-change-color: #15A986;
+        /*  when rotating changed icon color */
+        --height: 20px;
+        /*  height */
+        width: 400px;
+        -webkit-padding-end: 1em;
+        padding-inline-end: 1em;
+        /*  change this for padding in the end of input */
+        background: var(--input-bg);
+        position: relative;
+        border-radius: 4px;
+    }
+
+    .form label {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 2%;
+        height: var(--height);
+    }
+
+    .form input {
+        width: 100%;
+        -webkit-padding-start: calc(var(--padding) + var(--gap));
+        padding-inline-start: calc(var(--padding) + var(--gap));
+        outline: none;
+        background: none;
+        border: 0;
+    }
+
+    /* style for both icons -- search,close */
+    .form svg {
+        /* display: block; */
+        color: rgb(124, 39, 229);
+        -webkit-transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+        transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+        position: absolute;
+        height: 15px;
+    }
+
+    /* search icon */
+    .icon {
+        position: absolute;
+        left: var(--padding);
+        -webkit-transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+        transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    /* arrow-icon*/
+    .swap-off {
+        -webkit-transform: rotate(-80deg);
+        -ms-transform: rotate(-80deg);
+        transform: rotate(-80deg);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* close button */
+    .close-btn {
+        /* removing default bg of button */
+        background: none;
+        border: none;
+        right: calc(var(--padding) - var(--gap));
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        color: #111;
+        padding: 0.1em;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        opacity: 0;
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0);
+        visibility: hidden;
+    }
+
+    .form input:focus~.icon {
+        -webkit-transform: rotate(var(--rotate)) scale(1.3);
+        -ms-transform: rotate(var(--rotate)) scale(1.3);
+        transform: rotate(var(--rotate)) scale(1.3);
+    }
+
+    .form input:focus~.icon .swap-off {
+        opacity: 1;
+        -webkit-transform: rotate(-80deg);
+        -ms-transform: rotate(-80deg);
+        transform: rotate(-80deg);
+        visibility: visible;
+        color: var(--icon-change-color);
+    }
+
+    .form input:focus~.icon .swap-on {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    .form input:valid~.icon {
+        -webkit-transform: scale(1.3) rotate(var(--rotate));
+        -ms-transform: scale(1.3) rotate(var(--rotate));
+        transform: scale(1.3) rotate(var(--rotate))
+    }
+
+    .form input:valid~.icon .swap-off {
+        opacity: 1;
+        visibility: visible;
+        color: var(--icon-change-color);
+    }
+
+    .form input:valid~.icon .swap-on {
+        opacity: 0;
+        visibility: visible;
+    }
+
+    .form input:valid~.close-btn {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: 0s;
+        transition: 0s;
+    }
+
+    .side {
+        width: 30%;
+        float: left;
+    }
+
+    .main {
+        float: right;
+        width: 70%;
+    }
+
+    .logo {
+        width: 90px;
+        height: 50px;
+        border-radius: 3px;
+        background-color: rgb(117, 186, 226);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-radius: .7rem;
+        transition: all ease .3s;
+
+    }
+
+    .logo:hover {
+        box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+        border: 1px dashed rgba(0, 142, 255, 0.454);
+    }
+
+    .cardd {
+        box-shadow: 1px 2px 3px 2px rgba(0, 142, 236, 0.815);
+        width: 100%;
+        height: 100px;
+        border-radius: 1px;
+        background: rgb(117, 186, 226);
+        display: flex;
+        gap: 5px;
+        padding: .4em;
+        margin-top: 5px;
+    }
+
+    .cardd p {
+        height: 100%;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 1px;
+        transition: all .5s;
+        background: rgb(117, 186, 226);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fu {
+        border-right: 1px solid white;
+    }
+
+    .cardd p:hover {
+        flex: 4;
+    }
+
+    .cardd p span {
+        min-width: 14em;
+        padding: .5em;
+        text-align: center;
+        transform: rotate(-90deg);
+        transition: all .5s;
+        text-transform: uppercase;
+        color: rgb(0, 0, 0);
+        letter-spacing: .1em;
+    }
+
+    .cardd p:hover span {
+        transform: rotate(0);
+        color: black;
+        box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+        border-radius: 10px;
+    }
+
+    .cardd a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .cardd a:hover {
+        color: #111;
+    }
+
+    .header {
+        height: 200px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    hr {
+        background-color: #111;
+        height: 0.7px;
+        border-radius: 2px;
+        width: 80%;
+    }
+
+    .card {
+        width: 80%;
+        height: 300px;
+        border-radius: 10px;
+        position: relative;
+        background: #f5f5f5;
+        transition: box-shadow .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card-img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        background: radial-gradient(rgb(198, 252, 254), #6eb2ee);
+    }
+
+    .card-info {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .card-icon {
+        opacity: 0;
+        transform: translateX(-20%);
+        width: 2em;
+        height: 2em;
+        transition: all .3s ease-in-out;
+    }
+
+    .card svg {
+        cursor: pointer;
+        --size: 21px;
+        width: var(--size);
+        height: var(--size);
+        bottom: 50px;
+    }
+
+    /*Text*/
+    p {
+        line-height: 120%;
+    }
+
+    .text-title {
+        font-weight: 900;
+        font-size: 18px;
+        margin-right: 150px;
+
+    }
+
+    .text-subtitle {
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    /*Hover*/
+    .card:hover {
+        box-shadow: 3px 10px 20px 4px rgba(7, 123, 231, 0.1);
+    }
+
+    .card:hover .card-icon {
+        opacity: 1;
+        transform: translateX(20%);
+    }
+
+
+    .example {
+        width: 200px;
+        height: 288px;
+        margin-left: 33%;
+        margin-top: 2%;
+        border-radius: 20px;
+        box-shadow: 0.2px 2px 2px 1px rgba(169, 213, 213, 0.815);
+    }
+
+    .brand {
+        width: 12rem;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .brand-all {
+        display: flex;
+        justify-content: space-around;
+        align-content: space-around;
+    }
+
+    .con {
+        display: inline;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        transition: all 2.25s;
+        padding: 5em;
+        transform-style: preserve-3d;
+    }
+
+    .brand:hover .con {
+        transform: rotateY(0.5turn);
+    }
+
+    .front,
+    .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 2em;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+    }
+
+    .title {
+        transform: translateZ(5rem);
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        transform: translateZ(2rem);
+    }
+
+    .back {
+        transform: rotateY(0.5turn);
+    }
+
+    .description {
+        transform: translateZ(3rem);
+    }
+
+    .pull {
+        width: 100px;
+    }
+
+    .back input[type=button] {
+        background: radial-gradient(rgb(226, 255, 255), rgb(117, 186, 226));
+        box-shadow: 0 0 2px white;
+        border: none;
+        border-radius: 2px;
+        width: 80px;
+        height: 50px;
+        cursor: pointer;
+    }
+
+    .side-tittle {
+        text-align: center;
+    }
+
+    .new {
+        display: flex;
+        padding: 24px;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 24px;
+        width: 90%;
+        overflow-x: scroll;
+        border-radius: 8px;
+        box-shadow: 1px 1px 2px #629dd2;
+        gap: 12px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #6eb2ee;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #629dd2;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+    .new .items {
+        flex: 0 0 100%;
+        padding: 15px;
+        border-radius: 8px;
+        scroll-snap-align: start;
+    }
+
+    .new-item {
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    .alll{
+        width: 90%;
+        margin-top: 1%;
+    }
+</style>
+
+<body>
+    <div class="alll">
+        <img class="header" src="https://swall.teahub.io/photos/small/343-3436739_tech-cocktail.png" alt="">
+        <div class="topnav">
+            <a href=""><img class="logo"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Android_O_Preview_Logo.png/1024px-Android_O_Preview_Logo.png"
+                    alt=""> </a>
+            <a class="active" href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+            <form class="form">
+                <label for="search">
+                    <input required="" autocomplete="off" placeholder="Search" id="search" type="text">
+                    <div class="icon">
+                        <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="swap-on">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round"
+                                stroke-linecap="round"></path>
+                        </svg>
+                        <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="swap-off">
+                            <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linejoin="round" stroke-linecap="round"></path>
+                        </svg>
+                    </div>
+                    <button type="reset" class="close-btn">
+                        <svg viewBox="0 0 20 20" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </label>
+            </form>
+            <div class="shop">
+                <a href="#" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                </a>
+            </div>
+        </div>
+        <div class="cardd">
+            <p class="fu"><span><a href="">Man</a></span></p>
+            <p class="fu"><span><a href="">Woman</a></span></p>
+            <p><span><a href="">Kids</a></span></p>
+        </div>
+        <div class="brand-all">
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull" src="https://1000logos.net/wp-content/uploads/2021/06/Pull-Bear-logo.png"
+                            alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1024px-Zara_Logo.svg.png"
+                            alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull" src="https://logos-world.net/wp-content/uploads/2020/12/Bershka-Logo.png"
+                            alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/H%26M-Logo.svg/1280px-H%26M-Logo.svg.png"
+                            alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull"
+                            src="https://logos-world.net/wp-content/uploads/2020/11/Stradivarius-Emblem.png" alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="con">
+                    <div class="front">
+                        <img class="pull" src="https://logos-world.net/wp-content/uploads/2020/09/Fila-Logo.png" alt="">
+                    </div>
+
+                    <div class="back">
+                        <input type="button" value="Go">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side">
+            <h3 class="side-tittle">Brand of the month</h3>
+            <hr>
+            <div class="card">
+                <div class="card-img">
+                    <img class="example"
+                        src="https://static.pullandbear.net/2/photos//2022/I/0/2/p/8715/547/800/8715547800_2_1_8.jpg?t=1661762313609"
+                        alt="">
+                </div>
+                <div class="card-info">
+                    <div class="card-text">
+                        <p class="text-title">Jackets </p>
+                        <p class="text-subtitle">Pull & Bear</p>
+                    </div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 28 25">
+                            <path
+                                d="M13.145 2.13l1.94-1.867 12.178 12-12.178 12-1.94-1.867 8.931-8.8H.737V10.93h21.339z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://static.pullandbear.net/2/photos//2022/I/0/1/p/8715/369/711/8715369711_2_1_8.jpg?t=1665039215422"
+                        alt="" class="example">
+                </div>
+                <div class="card-info">
+                    <div class="card-text">
+                        <p class="text-title">Jackets</p>
+                        <p class="text-subtitle">Pull & Bear</p>
+                    </div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 28 25">
+                            <path
+                                d="M13.145 2.13l1.94-1.867 12.178 12-12.178 12-1.94-1.867 8.931-8.8H.737V10.93h21.339z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <h1>Promotions of the month</h1>
+            <div class="new">
+                <div class="items">
+                    <img class="new-item"
+                        src="https://t4.ftcdn.net/jpg/02/62/03/53/360_F_262035364_gGi8uJsPl9uljis8C6oxI0w6AM7MKDLq.jpg"
+                        alt="">
+                </div>
+                <div class="items">
+                    <img class="new-item"
+                        src="https://www.shutterstock.com/image-vector/promotion-square-sticker-sign-banner-260nw-1427755229.jpg"
+                        alt="">
+                </div>
+                <div class="items"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
